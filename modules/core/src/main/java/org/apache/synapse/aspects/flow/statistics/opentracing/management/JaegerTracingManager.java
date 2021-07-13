@@ -70,7 +70,8 @@ public class JaegerTracingManager implements OpenTracingManager {
     private void initializeTracer(Configuration.SamplerConfiguration sampler,
                                   Configuration.ReporterConfiguration reporterConf) {
         String serviceName = getServiceName();
-        this.tracer = new Configuration(serviceName)
+        this.tracer = Configuration
+                .fromEnv(serviceName)
                 .withSampler(sampler)
                 .withReporter(reporterConf)
                 .getTracer();
